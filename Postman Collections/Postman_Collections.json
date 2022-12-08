@@ -1,0 +1,107 @@
+{
+	"info": {
+		"_postman_id": "8cf44e92-a63f-45f9-aa0e-338d5c700c05",
+		"name": "Bulk Action RPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET_AuthToken",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "20b48353-6919-4d25-a3dd-b8091abedc4c",
+						"exec": [
+							"\r",
+							"pm.collectionVariables.set(\"user_token\", pm.response.json().access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"_postman_id": "87a3c3e9-dd7a-414e-925c-76189cd36595",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"grant_type\": \"password\",\n\"username\": \"cfm3@test.onelxk.co\",\n\"password\": \"P@ssw0rd\"\n}",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": "https://idp.dev.eu.cloud.onelxk.co/oauth/token"
+			},
+			"response": []
+		},
+		{
+			"name": "RPI_SubmitMultipleJob",
+			"_postman_id": "115e0917-1aeb-4b18-ab83-16436ecf8e6b",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{user_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"jobName\": \"UPLOAD_ASSET_INVENTORY\",\n    \"accountId\": \"70771355-cd80-47f7-a39a-4f0857a19410\",\n    \"assetIds\": [\n        \"444521395\"\n    ]\n}",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": "https://apis.dev.eu.cloud.onelxk.co/service-proxy/Agent%20Service/assets/bulkactions"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "6b7ee441-c7d5-4c2a-92ab-d22468970c7a",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "5f213146-dfc3-4be7-868c-2914d9b3fb15",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "324be67b-4d37-45ce-ab16-a77e5310f1b4",
+			"key": "user_token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
