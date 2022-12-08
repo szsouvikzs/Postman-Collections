@@ -1,0 +1,185 @@
+{
+	"info": {
+		"_postman_id": "76b68d36-ff35-4a10-ba5e-af367881ff90",
+		"name": "JIRA API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"_postman_id": "f29d5483-fdf5-496b-95fb-42c280f0544a",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"szsouvikzs\",\r\n    \"password\": \"SZA#at15\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8081/rest/auth/1/session"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Issue",
+			"_postman_id": "1d77395f-6de8-4e27-83bf-e390d3734e05",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "JSESSIONID=E9ED2B0789ED02016E4275C58BC2E676",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fields\": {\r\n        \"project\": {\r\n            \"key\": \"RES\"\r\n        },\r\n        \"summary\": \"Souvik Ghosh\",\r\n        \"description\": \"Amrita\",\r\n        \"issuetype\": {\r\n            \"name\": \"Bug\"\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8081/rest/api/2/issue"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Comment",
+			"_postman_id": "a62fc749-0c19-44b3-8e4c-a159cb50ff77",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"body\": \"This is my comment\",\r\n    \"visibility\": {\r\n        \"type\": \"role\",\r\n        \"value\": \"Administrators\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8081/rest/api/2/issue/10101/comment"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Comment",
+			"_postman_id": "bbd9e992-7210-4ab7-8958-70854026fa2a",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"body\": \"Check out this updated comment\",\r\n    \"visibility\": {\r\n        \"type\": \"role\",\r\n        \"value\": \"Administrators\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8081/rest/api/2/issue/10101/comment/10000"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Attachment",
+			"_postman_id": "209a161b-a839-48ca-9379-46af1de1031b",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Atlassian-Token",
+						"value": "no-check",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/souvghosh/OneDrive - Lexmark International/Souvik Ghosh - 1194491/Downloads/API Automation/Info.txt"
+						}
+					],
+					"options": {}
+				},
+				"url": "http://localhost:8081/rest/api/2/issue/10202/attachments"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Issue",
+			"_postman_id": "e6fc9844-c0b4-4359-b464-731404692021",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/rest/api/2/issue/10203?fields=comment",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"rest",
+						"api",
+						"2",
+						"issue",
+						"10203"
+					],
+					"query": [
+						{
+							"key": "fields",
+							"value": "comment"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Issue",
+			"_postman_id": "9b558142-9290-400d-87a3-9d1c814ef624",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {}
+				},
+				"url": "http://localhost:8081/rest/api/2/issue/10100"
+			},
+			"response": []
+		}
+	]
+}
